@@ -1,0 +1,176 @@
+﻿<%@ Page Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Home.aspx.cs" Inherits="Home" Title="DSSSBOnline" %>
+
+<%--<%@ Register Src="UserControl/Job_Advt.ascx" TagName="Job_Advt" TagPrefix="uc1" %>
+<%@ Register Src="UserControl/UpcomingJob_Advt.ascx" TagName="UpcomingJob_Advt" TagPrefix="uc4" %>--%>
+<asp:Content ID="Content1" ContentPlaceHolderID="body" runat="Server">
+    <table cellpadding="0" cellspacing="0" style="width: 1000px; height: 100%" border="0">
+        <tr >
+            <td valign="top" align="center">
+                <table border="0" cellpadding="0" cellspacing="3" style="width: 100%">
+                    <tr>
+                        <td style="width: 20%" valign="top">
+                            <table cellspacing="0" class="NwSec">
+                                <tr>
+                                    <td colspan="1" class="Nwheader">
+                                        <asp:Label ID="lblTitle" runat="server" meta:resourcekey="lblTitleResource1" Text="The latest announcement"></asp:Label>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <%--<a href="AdvtList.aspx?type=curr" style="color: White;">Show All </a>--%>
+                                        <asp:HyperLink ID="hyall" runat="server" Text="Show All"></asp:HyperLink>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="height: 50px">
+                                        <table id="Table1" cellspacing="0" cellpadding="0" width="100%" border="0" runat="server">
+                                            <tr id="Tr1" runat="server">
+                                                <td style="width: 100%">
+       <marquee id="Marquee1" direction="up" height="300" onmouseout="this.start();"
+                   onmouseover="this.stop();" scrollamount="1" scrolldelay="10" style="text-align: center"
+           width="320"><DIV style="TEXT-ALIGN: left"><SPAN style="COLOR:darkcyan"></SPAN><SPAN style="COLOR:darkslategray"></SPAN><div>
+           <table style="FONT-SIZE: 9pt; WIDTH: 100%; COLOR: #333333; FONT-FAMILY: Calibri; BORDER-COLLAPSE: collapse" cellSpacing=0 cellPadding=4 rules=all border=1>
+           <tbody>
+           </tbody>
+           </table>
+           </div>
+          
+     <asp:GridView id="grdannouncement" runat="server" AutoGenerateColumns="False"
+          BorderWidth="0" ShowHeader="false" GridLines="None" DataKeyNames="ADVT_NO,announcement" OnRowDataBound="grdannouncement_RowDataBound">
+           <Columns>
+            <asp:TemplateField>
+                 <ItemTemplate>
+            <asp:Image runat="server" ID="img_grid" ImageUrl="~/Images/new.jpg" />
+            </ItemTemplate> <ItemStyle CssClass="gridfonts"></ItemStyle>
+        </asp:TemplateField>                                                         
+        <asp:TemplateField> 
+        <ItemTemplate> 
+        <asp:HyperLink ID="hyplannounce" runat="server" Text=' <%# DataBinder.Eval(Container.DataItem, "announcement")%>'></asp:HyperLink>                               
+     <%-- <a href='AdvtList.aspx?advt=<%#Eval("AdvtNo") %>' class='NWnavlink' >
+        <%# DataBinder.Eval(Container.DataItem, "advt")%>--%>
+      </ItemTemplate></asp:TemplateField>
+             </Columns> 
+                </asp:GridView></DIV></marquee>
+            </td></tr></table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                    <tr>
+                                    <%--  <td>
+                                        <uc1:job_advt ID="Job_Advt1" runat="server" />
+                                    </td>--%>
+                                </tr>
+                 </table>
+                            <br />
+                            <table cellspacing="0" class="NwSec" style="top: 0px">
+                                <tr>
+                                    <%--  <td colspan="1" class="Nwheader">
+                                        <asp:Label ID="Label4" runat="server" meta:resourcekey="lblTitleResource1" Text="To be announced"
+                                            Width="150px"> </asp:Label>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a href="AdvtList.aspx?type=UpCom" style="color: White;">Show All </a>
+                                    </td>--%>
+                                </tr>
+                                <tr>
+                                    <%--<td style="height: 21px">
+                                        <uc4:upcomingjob_advt ID="UpcomingJob_Advt1" runat="server" />
+                                    </td>--%>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width: 100%" valign="top" align="center">
+                            <table cellspacing="0" class="NwSec" style="width: 100%">
+                                <tr>
+                                    <td colspan="1" class="Nwheader">
+                                        <asp:Label ID="Label6" runat="server" meta:resourcekey="lblTitleResource1" Text="Notice Board"
+                                            Width="150px"></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="height: 50px">
+                                        <table id="tblScrollingNw" cellspacing="0" cellpadding="0" width="100%" border="0"
+                                            runat="server" fontsize="2">
+                                            <tr id="rowScrollingNw" runat="server">
+                                                <td style="width: 100%">
+                                                    <marquee id="Marquee1" direction="up" height="300" onmouseout="this.start();"
+                                                        onmouseover="this.stop();" scrollamount="1" scrolldelay="10" style="text-align: center"
+                                                        width="320"><DIV style="TEXT-ALIGN: left"><SPAN style="COLOR: darkcyan"></SPAN><SPAN style="COLOR: darkslategray"></SPAN><DIV><TABLE style="FONT-SIZE: 9pt; WIDTH: 100%; COLOR: #333333; FONT-FAMILY: Calibri; BORDER-COLLAPSE: collapse" cellSpacing=0 cellPadding=4 rules=all border=1><TBODY></TBODY></TABLE></DIV>
+                                                       
+                                                        <asp:GridView id="GridView_message" runat="server" AutoGenerateColumns="False"
+                                                         BorderWidth="0" ShowHeader="false" GridLines="None" DataKeyNames="msgid,fileexist" OnRowDataBound="GridView_message_RowDataBound">
+                                                        <Columns>
+                                                         <asp:TemplateField>
+                                                         <ItemTemplate>
+                                                         <asp:Image runat="server" ID="img_grid" ImageUrl="~/Images/new.jpg" />
+                                                          </ItemTemplate> <ItemStyle CssClass="gridfonts"></ItemStyle>
+                                                           </asp:TemplateField>                                                         
+                                       <asp:TemplateField> 
+                                       <ItemTemplate>   
+                                       <asp:HyperLink ID="hypl" runat="server" Text=' <%# DataBinder.Eval(Container.DataItem, "message")%>'></asp:HyperLink>                           
+                                
+                            </ItemTemplate></asp:TemplateField>
+        
+                                                         </Columns> 
+                                                        </asp:GridView></DIV></marquee>
+                                                    </font>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        
+                       <%--jagat--%>
+                        <td rowspan="5" style="width: 25%;" valign="top" align="right">
+                            <table cellspacing="0" class="MenuSec" style="width: 100%;">
+                                <tr>
+                                    <td class="Nwheader" colspan="1">
+                                        <asp:Label ID="Label1" runat="server" Text="Options"></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        <asp:HyperLink ID="HyperLink5764" CssClass="NWnavlink" runat="server" NavigateUrl="~/AdvtDetailFiles/GPSC_OMR.PDF"
+                                            Target="_blank"><font size="1">DSSSB OMR Sample Sheet </font></asp:HyperLink>
+                                    </td>
+                                </tr>
+                            </table>
+                            <br />
+                            <table cellspacing="0" class="MenuSec" style="width: 100%;">
+                                <tr>
+                                    <td class="Nwheader" colspan="1">
+                                        <asp:Label ID="Label3" runat="server" Text="Support" Width="115px"></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        <asp:HyperLink ID="hlnHelp2" runat="server" CssClass="NWnavlink" Target="_blank"
+                                            NavigateUrl="http://get.adobe.com/reader/">Adobe Acrobat Reader </asp:HyperLink>
+                                    </td>
+                                </tr>
+                                <tr>
+                                <td>
+                                
+                                <table cellpadding="0" cellspacing="0" style="width: 100%">
+                                    <tr>
+                                        <td align="center">
+                                            <a href="http://www.delhi.gov.in" target="_blank">
+                                                <img src="Images/India_Gov.jpg" style="border: 0;" />
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center">
+                                            <a href="http://www.nic.in" target="_blank">
+                                                <img src="Images/Nic_Logo.jpg" />
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+                                </td>
+                                </tr>
+                        </td>
+                    </tr>
+                </table>
+           
+</asp:Content>

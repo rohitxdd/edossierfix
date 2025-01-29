@@ -1,0 +1,53 @@
+using System;
+using System.Data;
+using System.Configuration;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+using System.Net;
+using System.IO;
+
+/// <summary>
+/// Summary description for Sms
+/// </summary>
+public class Sms
+{
+	public Sms()
+	{
+		//
+		// TODO: Add constructor logic here
+		//
+	}
+
+    public void sendmsg(string mobilenos, string message)
+    {
+        try
+        {
+            string usernm = "dsssb.auth";  // ConfigurationManager.AppSettings["username"].ToString();
+            string pwd = "H*57Pe$f"; //ConfigurationManager.AppSettings["pwd"].ToString();
+            string senderid = "-DSSSB"; // ConfigurationManager.AppSettings["senderid"].ToString();
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://164.100.14.72/sendsms_nic/sendmsg.php?uname=" + usernm + "&pass=" + pwd + "&send=" + senderid + "&dest=" + Int64.Parse(mobilenos) + "&msg=" + message);
+            //HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://smsgw72.nic.in/sendsms_nic/sendmsg.php?uname=" + usernm + "&pass=" + pwd + "&send=" + senderid + "&dest=" + Int64.Parse(mobilenos) + "&msg=" + message);
+            //HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://smsgw72.nic.in/sendsms_nic/sendmsg.php?uname=dsssb.auth&pass=H*57Pe$f&send=-DSSSB&dest=9560338840&msg=hello");
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+            // Assign the response version to the String variable.
+            String ver = response.ProtocolVersion.ToString();
+
+            /* Create and assign the response stream to the StreamReader
+            variable.*/
+            StreamReader reader = new StreamReader(response.GetResponseStream());
+        }
+        catch (Exception ex)
+        {
+           
+            message msg = new message();
+            msg.Show("Inside function");
+            msg.Show(ex.Message);
+            //throw ex;
+        } 
+    }
+}

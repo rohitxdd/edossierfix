@@ -1,0 +1,120 @@
+﻿using System;
+using System.Collections;
+using System.Configuration;
+using System.Data;
+
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+
+
+public partial class Home : BasePage
+{
+    MD5Util md5util = new MD5Util();
+    protected void Page_Load(object sender, System.EventArgs e)
+    {
+        hyall.NavigateUrl = md5util.CreateTamperProofURL("AdvtList.aspx", null, "AdvtNo=" + MD5Util.Encrypt("", true));
+        //if (md5util.IsURLTampered(StringUtil.GetWithoutDigest(StringUtil.GetQueryString(Request.Url.ToString())),
+        //            StringUtil.GetDigest(StringUtil.GetQueryString(Request.Url.ToString()))) == true)
+        //{
+        //    Response.Redirect("Login.aspx?id=0");
+        //}
+        try
+        {
+            //Notice Board
+            string strSql = null;
+            try
+            {
+                strSql = "<table width='100%'>";
+                strSql = strSql + "</table>";
+                string strScrolling = "";
+                HtmlTableCell cellScrolling = new HtmlTableCell();
+                fill_announcement();
+                fill_message();
+                //Below is commented on 23/09/2011
+
+                //strScrolling = "<marquee id='ieslider' scrollAmount='1' HEIGHT='150px' direction='up' style='border:0px;' onmouseover='this.scrollAmount=0' onmouseout='this.scrollAmount=1'>"
+                //strScrolling = strScrolling + HttpUtility.HtmlDecode(strSql) + "</marquee>"
+                //cellScrolling.InnerHtml = strScrolling
+                //rowScrollingNw.Cells.Add(cellScrolling)
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+
+        //fill_message()
+    }
+
+    private void form1_Load(object sender, System.EventArgs e)
+    {
+        //fill_message()
+    }
+    private void fill_message()
+    {
+        DataTable dt = new DataTable();
+        CandidateData ObjCandD = new CandidateData();
+        dt = ObjCandD.GetMessage();
+
+        GridView_message.DataSource = dt;
+        GridView_message.DataBind();
+
+    }
+    private void fill_announcement()
+    {
+        DataTable dt = new DataTable();
+        CandidateData ObjCandD = new CandidateData();
+        //dt = ObjCandD.getannouncement();
+        dt = ObjCandD.GetJobAdvt();
+        grdannouncement.DataSource = dt;
+        grdannouncement.DataBind();
+
+    }
+    //GridView_message_RowDataBound
+
+    protected void grdannouncement_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            CandidateData objcd = new CandidateData();
+            string advtno = grdannouncement.DataKeys[e.Row.RowIndex]["ADVT_NO"].ToString();
+            HyperLink hannounce = ((HyperLink)e.Row.FindControl("hyplannounce"));
+            hannounce.NavigateUrl = md5util.CreateTamperProofURL("AdvtList.aspx", null, "AdvtNo=" + MD5Util.Encrypt(advtno, true));
+
+        }
+    }
+
+    protected void GridView_message_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            CandidateData objcd=new CandidateData();
+            string msgid = GridView_message.DataKeys[e.Row.RowIndex]["msgid"].ToString();
+            string fileexist = GridView_message.DataKeys[e.Row.RowIndex]["fileexist"].ToString();
+            HyperLink hmsg = ((HyperLink)e.Row.FindControl("hypl"));
+           
+            if (fileexist == "N")
+            {
+                 hmsg.Enabled = false;
+            }
+            else
+            {
+               hmsg.NavigateUrl = md5util.CreateTamperProofURL("msgfile.aspx", null, "msgid=" + MD5Util.Encrypt(msgid, true));
+            }
+            //else
+            //    msg.Show("File Not Found");
+
+        }
+    }
+
+   
+
+}

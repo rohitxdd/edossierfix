@@ -1,0 +1,1439 @@
+﻿.ddsubmenustyle, .ddsubmenustyle ul{ /*topmost and sub ULs, respectively*/
+font: normal 13px Verdana;
+margin: 0;
+padding: 0;
+position: absolute;
+left: 0;
+top: 0;
+list-style-type: none;
+background: lightyellow;
+border: 1px solid black;
+border-bottom-width: 0;
+visibility: hidden;
+z-index: 100;
+border-color:#849628; 
+}
+
+.ddsubmenustyle li a
+{
+	display: block;
+	width: 240px; /*width of menu (not including side paddings)*/
+	color: black;
+	background: aqua;
+	text-decoration: none;
+	padding: 4px 5px;
+	border-bottom: 1px solid black;
+	border-color: #849628;
+}
+
+* html .ddsubmenustyle li{ /*IE6 CSS hack*/
+display: inline-block;
+width: 170px; /*width of menu (include side paddings of LI A*/
+}
+
+.ddsubmenustyle li a:hover{
+background-color: #3399cc;
+color: white;
+}
+
+
+/* ######### Neutral CSS  ######### */
+
+.downarrowpointer{ /*CSS for "down" arrow image added to top menu items*/
+padding-left: 4px;
+border: 0;
+}
+
+.rightarrowpointer{ /*CSS for "right" arrow image added to drop down menu items*/
+position: absolute;
+padding-top: 3px;
+left: 100px;
+border: 0;
+}
+
+.ddiframeshim{
+position: absolute;
+z-index: 500;
+background: transparent;
+border-width: 0;
+width: 0;
+height: 0;
+display: block;
+}
+
+/* ######### Marker List Vertical Menu ######### */
+
+.markermenu{
+width: 180px; /*width of side bar menu*/
+clear: left;
+position: relative; /*Preserve this for "right" arrow images (added by script) to be positioned correctly*/
+
+}
+
+.markermenu ul{
+list-style-type: none;
+margin: 5px 0;
+padding: 0;
+border: 1px solid #9A9A9A;
+}
+
+.markermenu ul li a{
+background: #F2F2F2 url(bulletlist.gif) no-repeat 3px center; /*light gray background*/
+font: bold 13px "Lucida Grande", "Trebuchet MS", Verdana, Helvetica, sans-serif;
+color: #00014e;
+display: block;
+width: auto;
+padding: 3px 0;
+padding-left: 20px;
+text-decoration: none;
+border-bottom: 1px solid #B5B5B5;
+}
+
+* html .markermenu ul li a{ /*IE6 hack*/
+width: 155px;
+}
+
+.markermenu ul li a:visited, .markermenu ul li a:active{
+color: #00014e;
+background-color: #3399cc;
+}
+
+.markermenu ul li a:hover, .markermenu ul li a.selected{
+color: white;
+background-color: black;
+
+
+}
+
+/* ######### Customized Drop Down ULs CSS (inherits from ddlevelsmenu-base.css) ######### */
+
+.blackwhite li a{
+background: white;
+}
+
+.blackwhite li a:hover{
+background: black;
+color: white;
+
+}
+
+/* ######### Matt Black Strip Main Menu Bar CSS ######### */
+.mattblackmenu ul{
+margin: 0;
+padding: 0;
+font: bold 12px Verdana;
+list-style-type: none;
+border:0;
+
+/*background: #414141;*/
+background:#003366;
+overflow: hidden;
+width: 100%;
+
+}
+
+.mattblackmenu li{
+display: inline;
+margin: 0;
+
+}
+
+.mattblackmenu li a
+{
+	float:left;
+	display: block;
+	text-decoration: none;
+	margin: 0;
+	padding: 6px 8px; /*padding inside each tab*/
+	border-right: 1px solid Silver; /*right divider between tabs*/
+	color: white;
+	
+	background: #003366;
+}
+
+.mattblackmenu li a:visited{
+color: white;
+
+}
+
+.mattblackmenu li a:hover{
+background: #3399cc; /*background of tabs for hover state */
+
+}
+
+.mattblackmenu a.selected{
+background: black; /*background of tab with "selected" class assigned to its LI */
+background: #3399cc;
+
+}
+
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;	
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size:12px;
+	font-weight: normal;
+}
+
+.white_verdana {
+
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+
+	font-size: 11px;
+
+	font-weight: normal;
+
+	color: #FFFFFF;
+
+	text-decoration: none;
+
+}
+.buttonStyle{
+    /* Sliding right image */
+    height: 22px; /* CHANGE THIS VALUE ACCORDING TO IMAGE HEIGHT */
+	/* CHENGE THIS VALUE ACCORDING TO RIGHT IMAGE WIDTH */
+	/* FONT PROPERTIES */
+	text-decoration: none;
+	background-color:#FF8000;
+	color:Black;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:12px;
+	font-weight:bold;
+	text-align:center;
+}
+.buttonStyleApprove{
+    /* Sliding right image */
+    height: 22px; /* CHANGE THIS VALUE ACCORDING TO IMAGE HEIGHT */
+	margin-right: 6px;
+	padding-right: 20px; /* CHENGE THIS VALUE ACCORDING TO RIGHT IMAGE WIDTH */
+	/* FONT PROPERTIES */
+	text-decoration: none;
+	background-color:Red;
+	color: #FFFFFF;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:12px;
+	font-weight:bold;
+	text-align:center;
+}
+.buttonStyleCancel{
+    /* Sliding right image */
+    height: 22px; /* CHANGE THIS VALUE ACCORDING TO IMAGE HEIGHT */
+	margin-right: 6px;
+	padding-right: 20px; /* CHENGE THIS VALUE ACCORDING TO RIGHT IMAGE WIDTH */
+	/* FONT PROPERTIES */
+	text-decoration: none;
+	background-color:Green;
+	color: #FFFFFF;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:12px;
+	font-weight:bold;
+	text-align:center;
+}
+table.frame
+{
+	margin:0 0 10px;padding:0;border:1px solid #EBEBEB;border-bottom:0;
+	}
+table.frame table td{background-color:#FFF;border-bottom:1px solid #EBEBEB;}
+table.frame table td.fieldarea{background-color:#F5F5F5;color:#333;text-align:right;border-right:1px solid #EBEBEB;}
+
+.darkblue {
+
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+
+	font-size: 11px;
+
+	color: #006699;
+
+	text-decoration: none;
+
+	font-weight: bold;
+
+}
+
+.arial11 {
+
+	font-family: Arial, Helvetica, sans-serif;
+
+	font-size: 11px;
+
+	font-weight: normal;
+
+	color: #333333;
+
+	text-decoration: none;
+
+}
+
+.dotline {
+
+	border-top: 1px dashed #CCCCCC;
+
+	border-right: 1px none #CCCCCC;
+
+	border-bottom: 1px none #CCCCCC;
+
+	border-left: 1px none #CCCCCC;
+
+}
+
+.textfield {
+
+	font-family: Arial, Helvetica, sans-serif;
+
+	font-size: 11px;
+
+	font-style: normal;
+
+	font-weight: normal;
+
+	color: #333333;
+
+	text-decoration: none;
+
+	border: 1px solid #999999;
+
+}
+
+.verana11 {
+
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+
+	font-size: 11px;
+
+	font-style: normal;
+
+	font-weight: normal;
+
+	color: #333333;
+
+	text-decoration: none;
+
+	text-align: justify;
+
+}
+
+.verdanaorange {
+
+	font-family: Arial, Helvetica, sans-serif;
+
+	font-size: 12px;
+
+	font-weight: bold;
+
+	color: #FF6600;
+
+	text-decoration: none;
+
+}
+
+.lighterblue {
+
+	font-family: Arial, Helvetica, sans-serif;
+
+	font-size: 10px;
+
+	font-weight: normal;
+
+	color: #FF6600;
+
+	text-decoration: none;
+
+}
+
+.background {
+
+	background-image: url(images/body_bg.gif);
+
+}
+
+.linetop {
+
+	background-image: url(images/line_top.gif);
+
+}
+
+.lineleft {
+
+	background-image: url(images/line_left.gif);
+
+}
+
+.menu_bg {
+
+	background-image: url(images/menu_bg_123.gif);
+
+	line-height: 24px;
+
+}
+
+.box_bg_top {
+
+	background-image: url(images/text_top_bg.gif);
+
+}
+
+.box_bg_bottom {
+
+	background-image: url(images/text_bottom_bg.gif);
+
+}
+
+.lineright {
+
+	background-image: url(images/line_righty.gif);
+
+}
+
+.line_bottom {
+
+	background-image: url(images/line_bottom.gif);
+
+}
+
+.dotted_border {
+
+	border-top-width: 1px;
+
+	border-right-width: 1px;
+
+	border-bottom-width: 1px;
+
+	border-left-width: 1px;
+
+	border-top-style: none;
+
+	border-right-style: none;
+
+	border-bottom-style: dashed;
+
+	border-left-style: none;
+
+	border-top-color: #CCCCCC;
+
+	border-right-color: #CCCCCC;
+
+	border-bottom-color: #CCCCCC;
+
+	border-left-color: #CCCCCC;
+
+}
+
+.button_text {
+
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+
+	font-size: 11px;
+
+	font-weight: bold;
+
+	color: #FFFFFF;
+
+	text-decoration: none;
+
+	background-color: #FF9900;
+
+	border: 2px solid #FFFFFF;
+    height: 21px;
+}
+
+.greydot {
+
+	border: 1px dotted #CCCCCC;
+
+}
+.greydotRED {
+	border: 1px dotted #FF7123;
+}
+.greydotBLUE {
+	border: 1px dotted #ff33ff;
+}
+.verdana10 {
+
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+
+	font-size: 10px;
+
+	font-weight: normal;
+
+	color: #999999;
+
+	text-decoration: none;
+
+}
+
+.bg_port_top {
+
+	background-image: url(images/port2_top_bar.gif);
+
+}
+
+.port_right_bar {
+
+	background-image: url(images/port1_right_bar.gif);
+
+}
+
+.bg_port_bottom {
+
+	background-image: url(images/port2_bottom_bar.gif);
+
+}
+
+.port_left_bar {
+
+	background-image: url(images/port2_left_bar.gif);
+
+}
+
+.port_right_bar_1 {
+
+	background-image: url(images/port2_right_bar.gif);
+
+}
+
+.verdana10 {
+
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+
+	font-size: 10px;
+
+	font-weight: normal;
+
+	color: #666666;
+
+	text-decoration: none;
+
+}
+.required {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: Red;
+	text-decoration: none;
+}
+.formtext {
+
+	font-family: Arial, Helvetica, sans-serif;
+
+	font-size: 10px;
+
+	font-style: normal;
+
+	line-height: normal;
+
+	font-weight: normal;
+
+	font-variant: normal;
+
+	text-transform: none;
+
+	color: #333333;
+
+	text-decoration: none;
+
+}
+
+.Err {
+
+	font-family: Arial, Helvetica, sans-serif;
+
+	font-size: 14px;
+
+	font-weight: normal;
+
+	color: #FF0000;
+
+	text-decoration: none;
+
+	display: none;
+
+}
+
+.arial_menu {
+
+	font-family: Arial, Helvetica, sans-serif;
+
+	font-size: 11px;
+
+	font-weight: bold;
+
+	color: #333333;
+
+	text-decoration: none;
+
+	padding-right: 8px;
+
+	text-align: right;
+
+}
+
+.arial_menu_over {
+
+	font-family: Arial, Helvetica, sans-serif;
+
+	font-size: 11px;
+
+	font-weight: bold;
+
+	color: #FF6600;
+
+	text-decoration: none;
+
+	padding-right: 8px;
+
+}
+
+.sidemenu {
+
+	background-image: url(images/menu_bottom.gif);
+
+	background-repeat: no-repeat;
+
+}
+
+.portfoliotop {
+
+	background-image: url(images/port2_top_bar.gif);
+
+}
+
+.portfolioleft {
+
+	background-image: url(images/port2_left_bar.gif);
+
+}
+
+.portfolioright {
+
+	background-image: url(images/port2_right_bar.gif);
+
+}
+
+.protright {
+
+	background-image: url(images/port1_right_bar.gif);
+
+}
+
+.portfoliobottom {
+
+	background-image: url(images/port2_bottom_bar.gif);
+
+}
+
+.portleft {
+
+	background-image: url(images/port2_left_bar.gif);
+
+}
+
+.main_border {
+
+	background-image: url(images/body_bg.gif);
+
+}
+
+.accordionHeader
+{
+    border: 1px solid #2F4F4F;
+    color: white;
+    background-color: #993333;
+    font-weight: bold;
+    font-size:smaller;
+    padding: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.accordionHeaderSelected
+{
+    border: 1px solid #2F4F4F;
+    color: white;
+    background-color: #f1a725;
+    font-weight: bold;
+    font-size:smaller;
+    padding: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.accordionContent
+{
+    background-color: #B4CDCD;
+    border: 1px dashed #2F4F4F;
+    border-top: none;
+    padding: 5px;
+    padding-top: 10px;
+}
+
+.content_font {
+
+	font-family: Arial, Helvetica, sans-serif;
+
+	font-size: 12px;
+
+	font-weight: normal;
+
+	color: #333333;
+
+	text-decoration: none;
+
+	text-align: justify;
+
+}
+.content_fontCenter {
+
+	font-family: Arial, Helvetica, sans-serif;
+
+	font-size: 12px;
+
+	font-weight: normal;
+
+	color: #333333;
+
+	text-decoration: none;
+
+	text-align: center;
+
+}
+
+
+.arial18 {
+
+	font-family: Arial, Helvetica, sans-serif;
+
+	font-size: 20px;
+
+	font-weight: normal;
+
+	color: #FF6600;
+
+	text-decoration: none;
+
+}
+
+.arial14 {
+
+	font-family: Arial, Helvetica, sans-serif;
+
+	font-size: 13px;
+
+	font-weight: bold;
+
+	color: #333333;
+
+	text-decoration: none;
+
+}
+
+.arial14_over {
+
+	font-family: Arial, Helvetica, sans-serif;
+
+	font-size: 13px;
+
+	font-weight: bold;
+
+	color: #FF6600;
+
+	text-decoration: none;
+
+}
+
+.arial_18_header {
+
+	font-family: Arial, Helvetica, sans-serif;
+
+	font-size: 18px;
+
+	font-weight: normal;
+
+	color: #FFFFFF;
+
+	text-decoration: none;
+
+}
+
+.border_gray {
+
+	border: 2px solid steelblue;
+
+}
+
+.verdana10 {
+
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+
+	font-size: 10px;
+
+	color: #993300;
+
+	text-decoration: none;
+
+}
+
+.link_border_new {
+
+	border: 4px solid #FF9900;
+
+	font-family: Arial, Helvetica, sans-serif;
+
+	font-size: 11px;
+
+	color: #FFFFFF;
+
+	text-decoration: none;
+
+	background-color: #FFFFCC;
+
+}
+
+.portfolio_font {
+
+	font-family: Arial, Helvetica, sans-serif;
+
+	font-size: 11px;
+
+	font-weight: bold;
+
+	color: #006699;
+
+	text-decoration: none;
+
+	padding-right: 8px;
+
+}
+
+.port_highlight {
+
+	font-family: Arial, Helvetica, sans-serif;
+
+	font-size: 11px;
+
+	font-weight: bold;
+
+	color: #006600;
+
+	text-decoration: none;
+
+	padding-right: 8px;	
+
+}
+
+.horizontal_dot {
+
+	background-image: url(images/horizontal_dot.gif);
+
+	background-repeat: repeat-x;
+
+}
+
+.bl_curve {
+
+	
+	background-repeat: no-repeat;
+
+	background-position: 0% 100%;
+
+}
+
+.br_curve {
+
+	
+	background-repeat: no-repeat;
+
+	background-position: 100% 100%;
+
+}
+
+
+
+.vertical_dot {
+
+	background-image: url(images/vertical_dot.gif);
+
+	background-repeat: repeat-y;
+
+}
+.ariallightwhite {
+
+	font-family: Arial, Helvetica, sans-serif;
+
+	font-size: 13px;
+
+	font-weight: bold;
+
+	color: White;
+
+	text-decoration: none;
+
+}
+.ariallightgrey {
+
+	font-family: Arial, Helvetica, sans-serif;
+
+	font-size: 13px;
+
+	font-weight: bold;
+
+	color: navy;
+
+	text-decoration: none;
+
+}
+
+.formlabel
+{
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color:Navy;
+	text-decoration: none;
+
+}
+
+.formheading
+{
+    font-family: Tahoma, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	color:Navy;
+	text-decoration: none;
+}
+.table
+{
+	border-bottom:1px #333333 solid;
+	border-left:1px #333333 solid;
+	border-right:1px #333333 solid;
+	border-top:1px #333333 solid;
+}
+
+.ariallightgrey_1 {
+
+	font-family: Arial, Helvetica, sans-serif;
+
+	font-size: 13px;
+
+	font-weight: bold;
+
+	color: #c3c3c3;
+
+	text-decoration: none;
+
+}
+.trFloral
+{	
+	background-color:#f6f6f9;
+}
+.trWhite
+{
+	background-color:white;
+	
+}
+.cell_right
+{
+	background-color:#D2E2B7;
+}
+.cell_left
+{
+	background-color:white;
+	
+}
+.trLightBlue
+{
+	background-color: #b8b8ff;
+	color: Blue;
+	font-weight: bolder;
+	font-size:medium;
+}
+.trFooter
+{
+	background-color: #b8b8ff;
+	color: Green;
+	font-weight: bold;
+	font-size:smaller;
+}
+INPUT {
+	BORDER-RIGHT: #9da5ab 1px solid; BORDER-TOP: #9da5ab 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #9da5ab 1px solid; BORDER-BOTTOM: #9da5ab 1px solid; FONT-FAMILY: Verdana, sans-seri
+INPUT {
+	border: 1px solid #9da5ab;
+	FONT-SIZE: 11px; 	FONT-FAMILY: Verdana, sans-serif, Arial, Helvetica;
+	height: 19px;
+}
+ 1px solid; PADDING-TOP: 1px; BORDER-BOTTOM: #9da5ab 1px solid; FONT-FAMILY: Verdana, sans-serif, Arial, Helvetica; TEXT-ALIGN: left
+}
+SELECT {
+	border: 1px solid #9da5ab;
+	padding: 1px;
+	FONT-SIZE: 11px; 	COLOR: #000000; 	FONT-FAMILY: Verdana, sans-serif, Arial, Helvetica; 	BACKGROUND-COLOR: #ffffff;
+	margin-bottom: 0px;
+}
+
+.tblHeaderbgColor
+{
+	background-color:#2B4C93;
+	color:White;
+	font-weight: bold;
+}
+.tblMainHeaderbgColor
+{
+	background-color:#CBCD10;
+}
+
+#navcontainer {
+	FLOAT: left; WIDTH: 180px;
+}
+#navcontainer UL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+#navcontainer A {
+	PADDING-RIGHT: 3px; DISPLAY: block; PADDING-LEFT: 3px; PADDING-BOTTOM: 3px; COLOR: #000; PADDING-TOP: 3px; BACKGROUND-COLOR: #dadada; TEXT-DECORATION: none
+}
+#navcontainer A:hover {
+	COLOR: #074269
+}
+#navcontainer LI UL {
+	PADDING-RIGHT: 0px; MARGIN-TOP: -5px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px
+}
+
+.navlinks {
+	PADDING-RIGHT: 2px; PADDING-LEFT: 3px; PADDING-BOTTOM: 3px; PADDING-TOP: 3px; 
+}
+.NoPrint
+{
+    display:none;
+}
+.NwSec {
+    width: 350px;
+    height: 1px; 
+    border-style:solid;
+    padding:1 1 1 1; 
+    border-color:#464A84;
+    border-width:1px;
+}
+.MenuSec {
+    height: 1px; 
+    border-style:solid;
+    padding:1 1 1 1; 
+    border-color:#464A84;
+    border-width:1px;
+}
+.Nwheader {
+    background-image: url('../Images/TopNews.gif');  
+    height: 20px; 
+    text-align: center;
+    FONT-SIZE: 9pt; 
+    COLOR:#FFFFFF; 
+    font-weight: normal;
+}
+.NWnavlink {
+	color: #01690D; /*003262;*/
+	font-size: 10pt;
+	font-weight: normal;
+	z-index:0;
+}
+a.NWnavlink {
+    text-decoration: none;
+	color:#C60013;/*073be4;	*/
+    padding: 0;
+}
+a.NWnavlink:hover {
+	text-decoration: underline;
+	color: #ff8c00;		
+}
+
+
+/*Textbox Watermark*/
+
+.unwatermarked {
+	height:18px;
+	width:148px;
+}
+
+.watermarked {
+	height:18px;
+	width:150px;
+	padding:0px 0 0 0px;
+	border:1px solid #BEBEBE;
+	background-color:#F0F8FF;
+	color:gray;
+}	
+.gridfont
+{
+	background-color:#ffffff;
+	border-color:#666666;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	font-weight:bold;
+	color:Navy;
+	text-decoration: none;
+	border-width : 1px;
+	text-align:left;
+	vertical-align:top;
+}
+
+
+.gridheading 
+{
+	height:20px;
+	background-color:#003366;
+
+	color:White;
+	border-width : 1px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	text-decoration: none;
+	font-weight:bold;
+	text-align:left;
+	vertical-align:top;
+}
+
+.form
+{	text-align:center;
+ 	background-color:#e6e6ff;
+ 		
+}
+.ariallightgrey {
+
+	font-family: Arial, Helvetica, sans-serif;
+
+	font-size: 13px;
+
+	font-weight: bold;
+
+	color: #666666;
+
+	text-decoration: none;
+
+}
+
+
+.LoginSpan
+{
+color: #000066;
+text-decoration: none;
+font-size: 11pt;
+}
+.ddl {
+color:navy;
+border: 1px solid #4E4868;
+font-size:14px;
+background-color: #EBEBEB;
+font-size:10px;
+width: 200px;
+}
+
+
+.label1
+{
+	background-color:#000080;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color:white;
+	text-decoration: none;
+	text-align:left;
+		
+}
+
+.txt{
+	background-image:url(images/form_bg.jpg);
+	background-repeat:repeat-x;
+	border:1px solid #d1c7ac;
+	width: 230px;
+	color:#333333;
+	padding:3px;
+	margin-right:4px;
+	margin-bottom:8px;
+	font-family:tahoma, arial, sans-serif;
+}
+
+
+
+.buttonMenu{
+    /* Sliding right image */
+    height: 22px; /* CHANGE THIS VALUE ACCORDING TO IMAGE HEIGHT */
+	/* CHENGE THIS VALUE ACCORDING TO RIGHT IMAGE WIDTH */
+	/* FONT PROPERTIES */
+	text-decoration: none;
+	
+	color:Navy;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:13.5px;
+	font-weight:bold;
+	text-align:center;
+}
+.buttonFormLevel{
+    /* Sliding right image */
+    height: 22px; /* CHANGE THIS VALUE ACCORDING TO IMAGE HEIGHT */
+	/* CHENGE THIS VALUE ACCORDING TO RIGHT IMAGE WIDTH */
+	/* FONT PROPERTIES */
+	text-decoration: none;
+	background-color:#003366;
+	color:White;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size:13px;
+	text-align:center;
+}
+
+.cssbutton {
+	color:white;
+	background-color:  #003366;
+	font-size:12px;
+	text-align:center;
+	
+
+
+}
+
+
+.tr 
+{
+	height:16px;
+    font-weight: bold;
+	font-size: 14px;
+	color:White;
+	background-color:#003366;
+}
+
+@media print 
+{
+    .noPrint 
+    {
+        display:none;
+    }
+}
+table.gridtable {
+	font-family: verdana,arial,sans-serif;
+	font-size:11px;
+	color:Navy;
+	border-width: 1px;
+	border-color: #666666;
+	border-collapse: collapse;
+}
+table.gridtable th {
+	border-width: 1px;
+	padding: 2px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #dedede;
+}
+table.gridtable td {
+	border-width: 1px;
+	padding: 2px;
+	border-style: solid;
+	border-color: #666666;
+	background-color: #ffffff;
+}
+
+
+
+/*model popup extender
+<style type="text/css">  */
+         
+        .Clear  
+        {  
+            clear:both;  
+        }  
+          
+        .logButton  
+        {  
+          width: 100px;  
+          height: 30px;  
+          background-color: #FB5F67;  
+          font-family: Arial, Helvetica, sans-serif; font-size: 13px; font-weight: bold; font-style: normal;   
+            font-variant: normal; text-transform: capitalize; color: #FFFFFF;       
+        }  
+        a:hover {color:#FF00FF;}  
+        a:link    {color:blue;}  
+        a:visited {color:green;}  
+        a:active  {color:yellow;}  
+          
+        input[type="submit"]:hover {  
+    background:#0000FF;  
+}  
+  
+        .LoginBox  
+        {  
+            margin: 10px;  
+            height: 270px;  
+            background-color: #FB5F67;  
+        }  
+        .Heading  
+        {  
+            margin: 10px;  
+            height: 15px;  
+            background-color: #FFFFFF;  
+            font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: bold; font-style: normal;   
+            font-variant: normal; text-transform: capitalize; color: #6C6B6B;   
+            text-align: center;  
+            padding: 4px;  
+        }  
+  
+        .InnerLogin  
+        {  
+            margin: 10px;  
+            margin-right: 5px;  
+            width: 320px;  
+            height: 250px;  
+            float: left;  
+            background-color: White;  
+        }  
+        .NewUserBox  
+        {  
+            margin: 10px;  
+            margin-left: 5px;          
+            width: 330px;  
+            height: 250px;  
+            float: left;  
+            background-color: White;  
+        }  
+  
+        .ClickButton  
+        {  
+          width: 100px;  
+          height: 30px;  
+          background-color: #339933;  
+          font-family: Arial, Helvetica, sans-serif; font-size: 13px; font-weight: bold; font-style: normal;   
+          font-variant: normal; text-transform: capitalize; color: #FFFFFF;       
+        }  
+                 
+         .ContentInside  
+         {  
+             margin: 10px;  
+         }  
+          
+     .TextBoxSize  
+         {  
+             width: 200px;  
+         }  
+  
+     .SmallTextBox  
+         {  
+            width: 100px;    
+         }  
+           
+         .DropDownSize  
+         {  
+           width: 255px;  
+           height: 23px;    
+         }  
+     .ContentMiddle  
+         {  
+             margin: 0px auto;  
+             height: auto;  
+             width: 500px;  
+         }  
+          
+         .LeftHeading  
+         {  
+             font-family: Arial, Helvetica, sans-serif;  
+             font-size: 14px;  
+             font-weight: bold;  
+             font-style: normal;  
+             font-variant: normal;  
+             text-transform: capitalize;  
+             color: #CC3300;  
+             text-align: left;  
+         }  
+  
+     .SubHeadingLeft  
+         {  
+             margin: 10px;  
+             height: 15px;  
+             padding: 4px;  
+             background-color: #999999;  
+             font-family: Arial, Helvetica, sans-serif;  
+             font-size: 12px;  
+             font-weight: bold;  
+             font-style: normal;  
+             font-variant: normal;  
+             text-transform: capitalize;  
+             color: #FFFFFF;  
+             text-align: left;  
+         }  
+  
+    .SmallButton  
+        {  
+          width: 70px;  
+          height: 30px;  
+          background-color: #666633;  
+          font-family: Arial, Helvetica, sans-serif; font-size: 13px; font-weight: bold; font-style: normal;   
+          font-variant: normal; text-transform: capitalize; color: #FFFFFF;       
+        }  
+    .modalBackground  
+    {         
+        background-color: #336699;  
+        filter: alpha(opacity=80);  
+        opacity: 0.8;  
+    }         
+  
+      .modalBackground:hover    
+      {  
+          background-color : #CC3300;  
+          }  
+         .style1  
+         {  
+             width: 20px;  
+         }  
+         .style3  
+         {  
+             width: 4px;  
+         }  
+         .style4  
+         {  
+             width: 5px;  
+             color: Red;  
+         }  
+          
+          
+         .style5  
+         {  
+             width: 525px;  
+         }  
+          
+          
+         .style6  
+         {  
+             height: 34px;  
+         }  
+         .style7  
+         {  
+             width: 525px;  
+             height: 34px;  
+         }  
+         .style8  
+         {  
+             height: 23px;  
+         }  
+          
+          
+         .style9  
+         {  
+             width: 136px;  
+         }  
+         .style10  
+         {  
+             height: 34px;  
+             width: 136px;  
+         }  
+         .style12  
+         {  
+             height: 34px;  
+             width: 20px;  
+         }  
+         .style14  
+         {  
+             height: 34px;  
+             width: 4px;  
+         }  
+         .style15  
+         {  
+             width: 120px;  
+         }  
+          
+          
+   /* </style>  
+    
+    model popup extender ends here*/

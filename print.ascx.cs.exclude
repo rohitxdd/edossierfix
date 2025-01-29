@@ -1,0 +1,74 @@
+using System;
+using System.Data;
+using System.Configuration;
+using System.Collections;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+
+public partial class usercontrols_print : System.Web.UI.UserControl
+{
+    CandidateData objcd = new CandidateData();
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        string job1 = Session["job"].ToString();
+        //string job = ddjob.SelectedValue.ToString();
+        string[] str = job1.Split('/');
+        string name = str[0].ToString();
+        string year = str[1].ToString();
+        string advtno = str[2].ToString();
+
+        DataTable dtdetail = Session["dtdetail"] as DataTable;
+        if (dtdetail.Rows.Count > 0)
+        {
+            //lblid.Text = dtdetail.Rows[0]["Id"].ToString();
+            lbladvt.Text = job1;
+            lblappid1.Text = dtdetail.Rows[0]["applid"].ToString();
+            lblname1.Text = dtdetail.Rows[0]["name"].ToString();
+            lblgen1.Text = dtdetail.Rows[0]["gender"].ToString();
+            lblfat1.Text = dtdetail.Rows[0]["fname"].ToString();
+            lblmth1.Text = dtdetail.Rows[0]["mothername"].ToString();
+            lbladd1.Text = dtdetail.Rows[0]["address"].ToString();
+            lblemail1.Text = dtdetail.Rows[0]["email"].ToString();
+            lblnat1.Text = dtdetail.Rows[0]["nationality"].ToString();
+            lblphy1.Text = dtdetail.Rows[0]["ph"].ToString();
+            lblser1.Text = dtdetail.Rows[0]["exserviceman"].ToString();
+            lblcat1.Text = dtdetail.Rows[0]["category"].ToString();
+            lblbrth1.Text = dtdetail.Rows[0]["birthdt"].ToString();
+            lblclass1.Text = dtdetail.Rows[0]["subject"].ToString();
+            lblper1.Text = dtdetail.Rows[0]["percentage"].ToString();
+            lbluni1.Text = dtdetail.Rows[0]["board"].ToString();
+            lblqua1.Text = dtdetail.Rows[0]["educlass"].ToString();
+            string APPNO = dtdetail.Rows[0]["APPNO"].ToString();
+            string ApplId = dtdetail.Rows[0]["applid"].ToString();
+            imgphoto.ImageUrl = "~/ImgHandler.ashx?appid=" + APPNO + "&type=p";
+            imgsign.ImageUrl = "~/ImgHandler.ashx?appid=" + APPNO + "&type=s";
+            fillgrid();
+        }
+
+    }
+    public void fillgrid()
+    {
+        DataTable dt = new DataTable();
+        DataTable dtdetail = Session["dtdetail"] as DataTable;
+        string ApplId = dtdetail.Rows[0]["applid"].ToString();
+        try
+        {
+            dt = objcd.fillgrid(ApplId);
+            if (dt.Rows.Count > 0)
+            {
+                GrdComputer.Visible = true;
+                GrdComputer.DataSource = dt;
+                GrdComputer.DataBind();
+            }
+
+        }
+        catch (Exception ex)
+        {
+            Response.Redirect("ErrorPage.aspx");
+        }
+    }
+}

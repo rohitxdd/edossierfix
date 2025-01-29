@@ -1,0 +1,90 @@
+<%@ Application Language="C#" %>
+
+<script runat="server" type="text/javascript">
+
+    void Application_Start(object sender, EventArgs e) 
+    {
+        // Code that runs on application startup
+
+    }
+    
+    void Application_End(object sender, EventArgs e) 
+    {
+        //  Code that runs on application shutdown
+        Session.Abandon();
+        Session.RemoveAll();
+        Response.Cookies.Add(new HttpCookie("ASP.NET_SessionId", ""));
+        Response.Cookies.Add(new HttpCookie("newId", ""));
+
+        FormsAuthentication.SignOut();
+    }
+        
+    void Application_Error(object sender, EventArgs e) 
+    { 
+        // Code that runs when an unhandled error occurs
+       // string  ex = Server.GetLastError().Message.ToString(); 
+       // Application["ErrTxt"] = ex;
+        //Server.Transfer("Login.aspx");
+       // Server.Transfer("~/ErrorPage.aspx",false);
+        //if (HttpContext.Current != null)
+        //{
+        //    HttpContext ctx = HttpContext.Current;
+
+        //    Exception exception = ctx.Server.GetLastError();
+
+        //    if (exception != null)
+        //    {
+        //        string errorInfo =
+        //           "<br>Offending URL: " + ctx.Request.Url.ToString() +
+        //           "<br>Source: " + exception.Source +
+        //           "<br>Message: " + exception.Message +
+        //           "<br>Stack trace: " + exception.StackTrace;
+
+        //        // ctx.Response.Write(errorInfo);
+
+        //        // --------------------------------------------------
+        //        // To let the page finish running we clear the error
+        //        // --------------------------------------------------
+        //        ctx.Server.ClearError();
+
+        //        Server.Transfer("~/ErrorPage.aspx");
+        //    }
+
+        //}
+        
+    }
+
+    void Session_Start(object sender, EventArgs e) 
+    {
+        // Code that runs when a new session is started
+        if (HttpContext.Current.Request.QueryString["flagfromintradssb"] == null)
+        {
+            if (Session["rid"] == null)
+            {
+                //Response.Redirect("SMSOTP.aspx");   
+                //Response.Redirect("Default.aspx");
+            }
+        }
+
+    }
+
+    void Session_End(object sender, EventArgs e) 
+    {
+        // Code that runs when a session ends. 
+        // Note: The Session_End event is raised only when the sessionstate mode
+        // is set to InProc in the Web.config file. If session mode is set to StateServer 
+        // or SQLServer, the event is not raised.
+        //Response.Redirect("Login.aspx");
+        Response.Redirect("Logout.aspx");
+    }
+
+   protected void Application_BeginRequest(object sender, EventArgs e)
+    {
+        HttpContext context = HttpContext.Current;
+        if (!context.Request.IsSecureConnection && !context.Request.IsLocal)
+        {
+           // Response.Redirect(context.Request.Url.ToString().Replace("http:", "https:"));
+        }
+    }
+       
+</script>

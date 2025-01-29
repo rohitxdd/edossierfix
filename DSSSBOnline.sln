@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "DSSSBONLINE", ".", "{32E1447F-EA0F-47D4-8AB0-DF969A09BFA4}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
+		Debug.AspNetCompiler.VirtualPath = "/DSSSBOnline"
+		Debug.AspNetCompiler.PhysicalPath = "D:\DSSSBOnline\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\DSSSBOnline\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/DSSSBOnline"
+		Release.AspNetCompiler.PhysicalPath = "D:\DSSSBOnline\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\DSSSBOnline\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "15733"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|.NET = Debug|.NET
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{32E1447F-EA0F-47D4-8AB0-DF969A09BFA4}.Debug|.NET.ActiveCfg = Debug|.NET
+		{32E1447F-EA0F-47D4-8AB0-DF969A09BFA4}.Debug|.NET.Build.0 = Debug|.NET
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AE66908B-D2F9-4670-964E-492B6AC67D60}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,256 @@
+﻿using System;
+using System.Data;
+using System.Configuration;
+
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+
+using System.Data.SqlClient;
+
+/// <summary>
+/// Summary description for CandidateData
+/// </summary>
+public class CandidateData
+{
+    
+	public CandidateData()
+	{
+		//
+		// TODO: Add constructor logic here
+		//
+	}
+    string str;
+    
+    DataTable dt = new DataTable();
+    ApplicantData da = new ApplicantData();
+    
+    public DataTable GetMessage()
+    {
+        str = "Select * from MessageMaster ";
+
+        str += " order by pno ";
+        try
+        {
+            dt = da.GetDataTable(str);
+            return dt;
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+    public DataTable GetJobAdvt(string AdvtNo)
+    {
+
+        str = @"SELECT dbo.Job_Advt.JobSourceID,(dbo.Job_Source.Name+'/'+convert(varchar(20), dbo.Job_Advt.AdvtYear)+'/'+convert(varchar(20), dbo.Job_Advt.AdvtNo)) as ADVTNO,AdvtNo,AdvtYear ,dbo.Job_Advt.JobTitle, dbo.Job_Advt.StartsFrom, dbo.Job_Advt.EndsOn, dbo.Job_Advt.fee,
+                dbo.Job_Source.ContactNo FROM dbo.Job_Advt INNER JOIN dbo.Job_Source ON dbo.Job_Advt.JobSourceID = dbo.Job_Source.Id where CAST(CONVERT(VARCHAR,StartsFrom,101) AS DATETIME)
+                <= CAST(CONVERT(VARCHAR,GETDATE(),101) AS DATETIME) and CAST(CONVERT(VARCHAR,EndsOn,101) AS DATETIME) >=
+            cast(CONVERT(VARCHAR,GETDATE(),101) AS DATETIME)";
+  
+        if (AdvtNo != "")
+        {
+            str += " and AdvtNo=@AdvtNo";
+           
+        }
+        str += "  order by EndsOn";
+        SqlParameter[] param = new SqlParameter[1];
+
+        param[0] = new SqlParameter("@AdvtNo", SqlDbType.Int, 4);
+        if (AdvtNo == "")
+        {
+            param[0].Value = System.DBNull.Value; ;
+        }
+        else
+        {
+            param[0].Value = AdvtNo;
+        }
+        try
+            {
+
+                dt = da.GetDataTableQry(str,param);
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+    }
+    public DataTable Getappno(string jobid,string year,string advtno,string no,string dob)
+    {
+        str = @"select Id,jobsourceid,advtno,AdvtYear,APPNO,initial,ja.name as name,fname,surname,mothername from JobApplication ja inner join Job_Source js on ja.JobSourceID=js.Id
+            where jobsourceid in (select id from Job_Source where Name=@Name)
+            and advtno=@advtno and AdvtYear=@AdvtYear and APPNO=@APPNO and birthdt=@birthdt";
+        SqlParameter[] param = new SqlParameter[5];
+
+        param[0] = new SqlParameter("@Name", SqlDbType.NVarChar, 50);
+        param[0].Value = jobid;
+        param[1] = new SqlParameter("@advtno", SqlDbType.Int, 4);
+        if (advtno == "")
+        {
+            param[1].Value = System.DBNull.Value;
+        }
+        else
+        {
+            param[1].Value = advtno;
+        }
+        param[2] = new SqlParameter("@AdvtYear", SqlDbType.Int, 4);
+        if (year == "")
+        {
+            param[2].Value = System.DBNull.Value;
+        }
+        else
+        {
+            param[2].Value = year;
+        }
+        param[3] = new SqlParameter("@APPNO", SqlDbType.Int, 4);
+        if (no == "")
+        {
+            param[3].Value = System.DBNull.Value;
+        }
+        else
+        {
+            param[3].Value = no;
+        }
+        param[4] = new SqlParameter("@birthdt", SqlDbType.DateTime, 4);
+        if (dob == "")
+        {
+            param[4].Value = System.DBNull.Value;
+        }
+        else
+        {
+            param[4].Value =Utility.formatDate(dob);
+        }
+        try
+        {
+            DataTable dt = da.GetDataTableQry(str,param);
+            return dt;
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+
+    public int insertphoto(string appno, byte[] image, string ip, string UPDATEDT)
+    {
+        string str = "insert into JobApplicationPhoto (ApplId, OLEModule, IP, UPDATEDT) values (@ApplId,@OLEModule, @IP, @UPDATEDT) select SCOPE_IDENTITY() ";
+        SqlParameter[] param = new SqlParameter[4];
+        param[0] = new SqlParameter("@ApplId", SqlDbType.Int, 4);
+        param[0].Value = appno;
+        param[1] = new SqlParameter("@OLEModule", SqlDbType.Image, image.Length);
+        param[1].Value = image;
+        param[2] = new SqlParameter("@IP", SqlDbType.VarChar,20);
+        param[2].Value = ip;
+        param[3] = new SqlParameter("@UPDATEDT", SqlDbType.SmallDateTime,4);
+        param[3].Value = UPDATEDT;
+        try
+        {
+            int id1 =Convert.ToInt32(da.ExecScaler(str, param));
+            return id1;
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+
+    public int updatejobappsignature(string appno, byte[] image, string ip, string UPDATEDT)
+    {
+        string str = "update JobApplicationPhoto set Signature=@Signature,IP=@IP,UPDATEDT=@UPDATEDT where ApplId=@ApplId";
+        SqlParameter[] param = new SqlParameter[4];
+        param[0] = new SqlParameter("@ApplId", SqlDbType.Int, 4);
+        param[0].Value = appno;
+        param[1] = new SqlParameter("@Signature", SqlDbType.Image, image.Length);
+        param[1].Value = image;
+        param[2] = new SqlParameter("@IP", SqlDbType.VarChar, 20);
+        param[2].Value = ip;
+        param[3] = new SqlParameter("@UPDATEDT", SqlDbType.SmallDateTime, 4);
+        param[3].Value = UPDATEDT;
+        try
+        {
+            int id1 = da.ExecuteParameterizedQuery(str,param);
+            return id1;
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+//    public DataTable getapdetails(string jobid,string year,string advtno,string no)
+//    {
+//        str = @"select initial,name,fname,surname,mothername
+//                from JobApplication where advtno=@advtno and AdvtYear=@AdvtYear and APPNO=APPNO
+//                and JobSourceID in (select id from Job_Source where Name=@jobid) ";
+//        SqlParameter[] param = new SqlParameter[5];
+
+//        param[0] = new SqlParameter("@Name", SqlDbType.NVarChar, 50);
+//        param[0].Value = jobid;
+//        param[1] = new SqlParameter("@advtno", SqlDbType.Int, 4);
+//        if (advtno == "")
+//        {
+//            param[1].Value = System.DBNull.Value;
+//        }
+//        else
+//        {
+//            param[1].Value = advtno;
+//        }
+//        param[2] = new SqlParameter("@AdvtYear", SqlDbType.Int, 4);
+//        if (year == "")
+//        {
+//            param[2].Value = System.DBNull.Value;
+//        }
+//        else
+//        {
+//            param[2].Value = year;
+//        }
+//        param[3] = new SqlParameter("@APPNO", SqlDbType.Int, 4);
+//        if (no == "")
+//        {
+//            param[3].Value = System.DBNull.Value;
+//        }
+//        else
+//        {
+//            param[3].Value = no;
+//        }
+//        param[4] = new SqlParameter("@birthdt", SqlDbType.DateTime, 4);
+//        if (dob == "")
+//        {
+//            param[4].Value = System.DBNull.Value;
+//        }
+//        else
+//        {
+//            param[4].Value = Utility.formatDate(dob);
+//        }
+//        try
+//        {
+//            DataTable dt = da.GetDataTableQry(str, param);
+//            return dt;
+//        }
+//        catch (Exception ex)
+//        {
+//            throw ex;
+//        }
+//    }
+
+    public DataTable getannouncement()
+    {//GR. II(DASS) (4-April-2013 ) 
+        str = @"select jobtitle +'( '+CONVERT(varchar(11),StartsFrom,113)+')' as advt,jobtitle,AdvtYear,CONVERT(varchar,StartsFrom,103) as startdate,
+            CONVERT(varchar,EndsOn,103) as EndsOn,AdvtNo from Job_Advt
+            where  CONVERT(varchar,StartsFrom,103)<= CONVERT(varchar,GETDATE(),103) and  CONVERT(varchar,EndsOn,103)>= CONVERT(varchar,GETDATE(),103)";
+
+        //str += " order by pno ";
+        try
+        {
+            dt = da.GetDataTable(str);
+            return dt;
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+}

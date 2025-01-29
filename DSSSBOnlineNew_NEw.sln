@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "DSSSBOnlineNew_NEw", ".", "{B29EC629-5BB7-4BCA-9CB0-CA889B0FB60B}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFramework = "3.5"
+		Debug.AspNetCompiler.VirtualPath = "/DSSSBOnlineNew_NEw"
+		Debug.AspNetCompiler.PhysicalPath = "D:\dsssb\DSSSBOnlineNew_NEw\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\DSSSBOnlineNew_NEw\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/DSSSBOnlineNew_NEw"
+		Release.AspNetCompiler.PhysicalPath = "D:\dsssb\DSSSBOnlineNew_NEw\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\DSSSBOnlineNew_NEw\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "6719"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|.NET = Debug|.NET
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B29EC629-5BB7-4BCA-9CB0-CA889B0FB60B}.Debug|.NET.ActiveCfg = Debug|.NET
+		{B29EC629-5BB7-4BCA-9CB0-CA889B0FB60B}.Debug|.NET.Build.0 = Debug|.NET
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
