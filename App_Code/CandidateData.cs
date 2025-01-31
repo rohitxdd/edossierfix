@@ -3190,7 +3190,7 @@ public class CandidateData
         {
             condn = " and tr.qtype=@qtype ";
         }
-        string str = @"select je.id,je.applid,sm.standard as stnd,je.standard,qid,te.name,Extraquli,percentage,board,ms.code as Stateid,ms.State,month,YEAR,(month + '/' + YEAR) as myear
+        string str = @"select je.id,je.applid,sm.standard as stnd,je.standard,qid,te.name,Extraquli,percentage,board,ms.code as Stateid,ms.State,month,YEAR,(month + '/' + YEAR) as myear, je.deptreqid
                     from dsssbonline_recdapp.dbo.JobEducation je 
                     inner join standardMaster sm on je.standard=sm.id 
                     left outer join  tbledu_TRN tr on tr.uid = je.qid 
@@ -7750,15 +7750,15 @@ from dsssbonline_recdapp.dbo.JobApplication jap inner join Job_Advt ja on ja.jid
 
 
     }
-    public int InsertEDqualification(int edid, string qid, string percentage, string board, string state, string month, string year, int standard, string IP, string finalresultdate, string govtorpvt, string docproofpvtinst, string edqid, string otherdegreename, string instname)
+    public int InsertEDqualification(int edid, string qid, string percentage, string board, string state, string month, string year, int standard, string IP, string finalresultdate, string govtorpvt, string docproofpvtinst, string edqid, string otherdegreename, string instname, string deptreqid)
     {
         int i = 0;
         int j = 0;
 
-        string str = @"insert into edqualidetails (edid,qid,percentage,board,state,month,year,standard,edate,IP,finalresultdate,govtorpvt,docproofpvtinst,edqid,otherdegreename,instname) 
-         values(@edid,@qid,@percentage,@board,@state,@month,@year,@standard,getdate(),@IP,@finalresultdate,@govtorpvt,@docproofpvtinst,@edqid,@otherdegreename,@instname) Select SCOPE_IDENTITY() ";
+        string str = @"insert into edqualidetails (edid,qid,percentage,board,state,month,year,standard,edate,IP,finalresultdate,govtorpvt,docproofpvtinst,edqid,otherdegreename,instname, deptreqid) 
+         values(@edid,@qid,@percentage,@board,@state,@month,@year,@standard,getdate(),@IP,@finalresultdate,@govtorpvt,@docproofpvtinst,@edqid,@otherdegreename,@instname, @deptreqid) Select SCOPE_IDENTITY() ";
 
-        SqlParameter[] param = new SqlParameter[15];
+        SqlParameter[] param = new SqlParameter[16];
 
         param[j] = new SqlParameter("@edid", SqlDbType.Int);
         param[j].Value = edid;
@@ -7911,6 +7911,17 @@ from dsssbonline_recdapp.dbo.JobApplication jap inner join Job_Advt ja on ja.jid
             param[j].Value = docproofpvtinst;
         }
 
+        j++;
+        param[j] = new SqlParameter("@deptreqid", SqlDbType.Int);
+        if (deptreqid == "" || deptreqid == null)
+        {
+            param[j].Value = System.DBNull.Value;
+        }
+        else
+        {
+            param[j].Value = deptreqid;
+        }
+
         try
         {
             i = Convert.ToInt32(da.ExecScaler(str, param));
@@ -7931,7 +7942,7 @@ from dsssbonline_recdapp.dbo.JobApplication jap inner join Job_Advt ja on ja.jid
             string str = @"SELECT  edq.edid, qid, percentage, board, instname, edq.state as Stateid, month, year, edq.standard,convert(varchar, finalresultdate,103) as finalresultdate, govtorpvt,
                           edq.id,sm.standard as stnd,te.name,ms.State,(month + '/' + YEAR) as myear,edq.edqid,otherdegreename,
                           edmid,docproofpvtinst,case edq.edqid when '99' then otherdegreename+' (Not Available in the RR)' else edqname end as edqname,
-                            case govtorpvt when 'G' then 'Goverment' when 'P' then 'Private'  end as instgovorpvt
+                            case govtorpvt when 'G' then 'Goverment' when 'P' then 'Private'  end as instgovorpvt, edq.deptreqid
                           FROM edqualidetails edq 
                         inner join standardMaster sm on edq.standard=sm.id 
                         left outer join  tbledu_TRN tr on tr.uid = edq.qid 
@@ -8112,11 +8123,21 @@ from dsssbonline_recdapp.dbo.JobApplication jap inner join Job_Advt ja on ja.jid
         }
 
     }
-    public DataTable GetEdossierqualiMaster(string jid)
+    public DataTable GetEdossierqualiMaster(string jid, bool iscombined = false)
     {
         string str = @"SELECT edqid, edqname FROM EdossierQualiMast where jid=@jid";
 
         str += " order by edqname  ";
+
+
+        if (iscombined) 
+        {
+            str = @"SELECT  concat(convert(varchar, deptreqid),':', convert(varchar, edqid)) as  edqid,  concat(b.deptcode, ':', b.JobTitle, ':', edqname) edqname  FROM EdossierQualiMast a
+
+                    inner join job_advt b on a.deptreqid = b.jid
+
+                    where a.jid=@jid order by edqname";
+        }
         SqlParameter[] param = new SqlParameter[1];
         param[0] = new SqlParameter("@jid", SqlDbType.Int, 4);
         if (jid != "")

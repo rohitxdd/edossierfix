@@ -328,4 +328,30 @@ public class CandCombdData
             throw ex;
         }
     }
+
+    public bool IsCombined(JobIdentifier x, string v)
+    {
+        string condition = Enum.GetName(typeof(JobIdentifier), x);
+        string q = string.Format("select deptcode from job_advt where {0} = @v", condition);
+        SqlParameter[] param = new SqlParameter[1];
+
+        param[0] = new SqlParameter("@v", SqlDbType.VarChar, 50);
+        param[0].Value = v;
+        try
+        {
+            dt = da.GetDataTableQry(q, param);
+            return dt.Rows.Count > 0 && dt.Rows[0]["deptcode"].ToString() == "COMBD";
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+}
+
+public enum JobIdentifier
+{
+    postcode,
+    jid,
+    reqid
 }

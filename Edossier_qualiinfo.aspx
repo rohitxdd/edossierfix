@@ -23,7 +23,7 @@
         </tr>
         <tr>
             <td>
-                <asp:GridView ID="gvquali" runat="server" DataKeyNames="id,qid,State,YEAR,standard,month,govtorpvt,edqid,otherdegreename,edmid,docproofpvtinst"
+                <asp:GridView ID="gvquali" runat="server" DataKeyNames="id,qid,State,YEAR,standard,month,govtorpvt,edqid,otherdegreename,edmid,docproofpvtinst,deptreqid"
                     AutoGenerateColumns="False" Font-Names="Arial" Width="100%" EnableTheming="False"
                     CssClass="gridfont" OnRowCommand="gvquali_RowCommand" OnRowEditing="gvquali_RowEditing"
                     OnRowDataBound="gvquali_RowDataBound" OnRowUpdating="gvquali_RowUpdating" OnRowCancelingEdit="gvquali_RowCancelingEdit">

@@ -14,9 +14,11 @@ public partial class Edossier_qualiinfo : BasePage
 {
     DataTable dt = new DataTable();
     CandidateData objCandD = new CandidateData();
+    CandCombdData _ = new CandCombdData();
     message msg = new message();
     MD5Util md5util = new MD5Util();
     string jid = "", edid = "", applid = "", rollno = "", post = "";
+    bool iscombined = false;
     protected void Page_Load(object sender, EventArgs e)
     {
         jid = MD5Util.Decrypt(Request.QueryString["jid"].ToString(), true);
@@ -24,6 +26,7 @@ public partial class Edossier_qualiinfo : BasePage
         applid = MD5Util.Decrypt(Request.QueryString["applid"].ToString(), true);
         rollno = MD5Util.Decrypt(Request.QueryString["rollno"].ToString(), true);
         post = MD5Util.Decrypt(Request.QueryString["post"].ToString(), true);
+        iscombined = _.IsCombined(JobIdentifier.jid, jid);
         if (!IsPostBack)
         {
             fill_application_data(applid);
@@ -52,9 +55,10 @@ public partial class Edossier_qualiinfo : BasePage
                         month = dt.Rows[i]["month"].ToString();
                         year = dt.Rows[i]["year"].ToString();
                         standard = dt.Rows[i]["standard"].ToString();
+                        string deptreqid = dt.Rows[i]["deptreqid"].ToString();
                         //  finalresultdate = dt.Rows[i][finalresultdate].ToString();
                         // govtorpvt = dt.Rows[i][govtorpvt].ToString();
-                        int temp = objCandD.InsertEDqualification(int.Parse(edid), qid, percentage, board, state, month, year, int.Parse(standard), IP,"","","","","","");
+                        int temp = objCandD.InsertEDqualification(int.Parse(edid), qid, percentage, board, state, month, year, int.Parse(standard), IP,"","","","","","", deptreqid);
                     }
                 }
             }
@@ -229,6 +233,7 @@ public partial class Edossier_qualiinfo : BasePage
             RadioButtonList rbtgovorpvt = (RadioButtonList)gvquali.Rows[index].FindControl("rbtgovorpvt");
             FileUpload fileupload = (FileUpload)gvquali.Rows[index].FindControl("fileupload");
             string edmid = gvquali.DataKeys[index].Values["edmid"].ToString();
+            string deptreqid = gvquali.DataKeys[index].Values["deptreqid"].ToString();
             if (ddldegreename.SelectedValue != "99")
             {
                 txtotherdegree.Text = "";
@@ -245,7 +250,15 @@ public partial class Edossier_qualiinfo : BasePage
                     uploadfile(edmid, fileupload, "I", "", "", "", "", "", "", "", "");
                 }
             }
-            int temp = objCandD.UpdateEDqualidetails(int.Parse(id), txtinstname.Text, Utility.formatDate(txtfresultdt.Text), rbtgovorpvt.SelectedValue, IP, ddldegreename.SelectedValue, txtotherdegree.Text,hfdocid.Value);
+
+            string edqid = ddldegreename.SelectedValue;
+            if (iscombined)
+            {
+                string t = ddldegreename.SelectedValue.Split(':')[1];
+                edqid = t;
+            }
+
+            int temp = objCandD.UpdateEDqualidetails(int.Parse(id), txtinstname.Text, Utility.formatDate(txtfresultdt.Text), rbtgovorpvt.SelectedValue, IP, edqid, txtotherdegree.Text,hfdocid.Value);
             if (temp > 0)
             {
                 msg.Show("Record Saved");
@@ -273,6 +286,19 @@ public partial class Edossier_qualiinfo : BasePage
             DropDownList DropDownList_yeare = (DropDownList)gvquali.Controls[0].Controls[0].FindControl("DropDownList_yeare");
             DropDownList ddlstande = (DropDownList)gvquali.Controls[0].Controls[0].FindControl("ddlstande");
 
+
+            string deptreqid = string.Empty;
+
+            try
+            {
+                deptreqid = gvquali.DataKeys[0].Values["deptreqid"].ToString();
+
+            }catch(Exception ex)
+            {
+                //
+            }
+
+
             string edmid = objCandD.get_edmid_pvtinst(jid);
             if (ddldegreename.SelectedValue != "99")
             {
@@ -290,7 +316,14 @@ public partial class Edossier_qualiinfo : BasePage
                     uploadfile(edmid, fileupload, "I", "", "", "", "", "", "", "", "");
                 }
             }
-            int temp = objCandD.InsertEDqualification(int.Parse(edid), DropDownList_qe.SelectedValue, txt_pere.Text, txt_ex_bodye.Text, DropDownList_edu_statee.SelectedValue, DropDownList_monthe.SelectedValue, DropDownList_yeare.SelectedValue, int.Parse(ddlstande.SelectedValue), IP,Utility.formatDate( txtfresultdt.Text), rbtgovorpvt.SelectedValue, hfdocid.Value, ddldegreename.SelectedValue, txtotherdegree.Text, txtinstname.Text);
+
+            string edqid = ddldegreename.SelectedValue;
+            if (iscombined)
+            {
+                string t = ddldegreename.SelectedValue.Split(':')[1];
+                edqid = t;
+            }
+            int temp = objCandD.InsertEDqualification(int.Parse(edid), DropDownList_qe.SelectedValue, txt_pere.Text, txt_ex_bodye.Text, DropDownList_edu_statee.SelectedValue, DropDownList_monthe.SelectedValue, DropDownList_yeare.SelectedValue, int.Parse(ddlstande.SelectedValue), IP,Utility.formatDate( txtfresultdt.Text), rbtgovorpvt.SelectedValue, hfdocid.Value, edqid, txtotherdegree.Text, txtinstname.Text, deptreqid);
             if (temp > 0)
             {
                 msg.Show("Record Saved");
@@ -892,7 +925,7 @@ public partial class Edossier_qualiinfo : BasePage
     {
         try
         {
-            DataTable dtrr = objCandD.GetEdossierqualiMaster(jid);
+            DataTable dtrr = objCandD.GetEdossierqualiMaster(jid, iscombined);
             ddldegreename.DataSource = dtrr;
             ddldegreename.DataTextField = "edqname";
             ddldegreename.DataValueField = "edqid";
